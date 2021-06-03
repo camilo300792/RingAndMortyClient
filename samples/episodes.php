@@ -44,5 +44,6 @@ foreach ($responseEpisodeDecoded['characters'] as $character) {
             <img src="<?php echo $character['image']; ?>" alt="200"/>
         </div>
     <?php endforeach; ?>
+    <h2>hola</h2>
 </body>
 </html>
