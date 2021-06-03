@@ -37,12 +37,12 @@ foreach ($responseEpisodeDecoded['characters'] as $character) {
 <body>
     <h1><?php echo $responseEpisodeDecoded['name']; ?></h1>
     <span>Fecha de lanzamiento: <?php echo $responseEpisodeDecoded['air_date']; ?></span>
-    <h2>Personajes</h2>
     <?php foreach ($characters as $character): ?>
         <div>
             <p><?php echo $character['name']; ?></p>
             <img src="<?php echo $character['image']; ?>" alt="200"/>
         </div>
     <?php endforeach; ?>
+    <button>Consultar capítulo</button>
 </body>
 </html>
