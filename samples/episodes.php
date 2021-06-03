@@ -44,5 +44,6 @@ foreach ($responseEpisodeDecoded['characters'] as $character) {
         </div>
     <?php endforeach; ?>
     <button>Consultar capítulo</button>
+    <h2>hola</h2>
 </body>
 </html>
