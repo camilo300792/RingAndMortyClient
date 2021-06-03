@@ -1,0 +1,16 @@
+{
+    "name": "krono/rickandmorty-client",
+    "description": "Rick and morty php client",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "camilo300792",
+            "email": "eliascamiloms92@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "guzzlehttp/guzzle": "7.4.x-dev"
+    }
+}
