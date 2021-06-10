@@ -1,26 +1,9 @@
 <?php
 
 require '../vendor/autoload.php';
-
-use GuzzleHttp\Client;
-
-$client = new Client([
-    'base_uri' => 'https://rickandmortyapi.com/api/',
-    'verify' => false
-]);
-
-$responseEpisode = $client->request('GET', 'episode/2');
-
-$responseEpisodeDecoded = json_decode($responseEpisode->getBody()->getContents(), true);
-
-$characters = [];
-foreach ($responseEpisodeDecoded['characters'] as $character) {
-    $responseCharacter = $client->request('GET', $character);
-    $responseCharacterDecoded = json_decode($responseCharacter->getBody()->getContents(), true);
-    $characters[] = [
-        'name' => $responseCharacterDecoded['name'],
-        'image' => $responseCharacterDecoded['image'],
-    ];
+$ramClient = new \RAMC\RAMClient();
+if (isset($_GET['episode'])) {
+    $response = $ramClient->getEpisode($_GET['episode']);
 }
 
 ?>
@@ -35,15 +18,28 @@ foreach ($responseEpisodeDecoded['characters'] as $character) {
     <title>Document</title>
 </head>
 <body>
-    <h1><?php echo $responseEpisodeDecoded['name']; ?></h1>
-    <span>Fecha de lanzamiento: <?php echo $responseEpisodeDecoded['air_date']; ?></span>
-    <?php foreach ($characters as $character): ?>
-        <div>
-            <p><?php echo $character['name']; ?></p>
-            <img src="<?php echo $character['image']; ?>" alt="200"/>
-        </div>
-    <?php endforeach; ?>
-    <button>Consultar capítulo</button>
-    <h2>hola</h2>
+    <main>
+        <form action="episodes.php" method="get">
+            <div>
+                <label for="episode">Indica el número del episodio que deseas consultar</label>
+                <br />
+                <input type="number" name="episode" />
+            </div>
+            <div>
+                <button>Consular</button>
+            </div>
+        </form>
+    </main>
+
+    <?php if(isset($response)): ?>
+        <ol>
+            <li><b>ID:</b> <?php echo $response['id'] ?></li>
+            <li><b>NOMBRE:</b> <?php echo $response['name'] ?></li>
+            <li><b>AL AIRE:</b> <?php echo $response['air_date'] ?></li>
+            <li><b>CÓDIGO:</b> <?php echo $response['episode'] ?></li>
+        </ol>
+    <?php endif; ?>
 </body>
 </html>
+
+
