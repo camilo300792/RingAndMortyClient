@@ -48,6 +48,17 @@ final class RAMClient
         return $this->sendRequest('GET', self::API_EPISODES . '/' . $episode);
     }
 
+      /**
+     * Access the list of character
+     *
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getCharacter(int $character)
+    {
+        return $this->sendRequest('GET', self::API_CHARACTERS . '/' . $character);
+    }
+
     /**
      * Send API request
      *
