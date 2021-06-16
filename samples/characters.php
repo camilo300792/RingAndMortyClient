@@ -5,6 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $ramClient = new \RAMC\RAMClient();
 if (isset($_GET['character'])) {
     $response = $ramClient->getCharacter($_GET['character']);
+//    die(var_dump($response));
 }
 
 ?>
@@ -38,9 +39,8 @@ if (isset($_GET['character'])) {
             <li><b>NOMBRE:</b> <?php echo $response['name'] ?></li>
             <li><b>STATUS:</b> <?php echo $response['status'] ?></li>
             <li><b>SPECIES:</b> <?php echo $response['species'] ?></li>
-            
         </ol>
-    
+        <img src="<?php echo $response['image'] ?>" alt="" />
     <?php endif; ?>
 </body>
 </html>

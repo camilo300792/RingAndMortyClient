@@ -37,18 +37,29 @@ final class RAMClient
     }
 
     /**
+     * Access the list of locations
+     *
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getLocations()
+    {
+        return $this->sendRequest('GET', self::API_LOCATIONS);
+    }
+
+    /**
      * Get a single episode
      *
      * @param int $episode
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getEpisode(int $episode)
+    public function getEpisode(int $episode, bool $decode = false)
     {
         return $this->sendRequest('GET', self::API_EPISODES . '/' . $episode);
     }
 
-      /**
+    /**
      * Access the list of character
      *
      * @return mixed
@@ -64,12 +75,16 @@ final class RAMClient
      *
      * @param string $method
      * @param string $uri
+     * @param bool $decode
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    private function sendRequest(string $method, string $uri)
+    private function sendRequest(string $method, string $uri, bool $decode = false)
     {
         $response = $this->client->request($method, $uri);
-        return json_decode($response->getBody()->getContents(), true);
+        if ($decode) {
+            return json_decode($response->getBody()->getContents(), true);
+        }
+        return $response->getBody()->getContents();
     }
 }

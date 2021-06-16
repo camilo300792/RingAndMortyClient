@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    </head>
+    <body class="container">
+        <main>
+            <form action="episodes.php" method="get" id="form-episodes">
+                <div class="form-group">
+                    <label for="episode">Indica el número del episodio que deseas consultar</label>
+                    <input class="form-control" type="number" name="episode" id="episode"/>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <button class="btn btn-info" type="submit">Consular</button>
+                </div>
+            </form>
+            <div>
+                <p><b>Nombre</b>: <span id="result"></span></p>
+            </div>
+            <script>
+                form = document.getElementById('form-episodes')
+                form.addEventListener('submit', e => {
+                    e.preventDefault();
+                    let formData = new FormData(e.target)
+                    fetch('episodes.php?episode=' + formData.get('episode'))
+                        .then(response => response.json())
+                        .then(respJson => {
+                            document.getElementById('result').innerHTML = respJson.name
+                        });
+                })
+            </script>
+        </main>
+    </body>
+</html>
