@@ -22,20 +22,11 @@
                 </div>
             </form>
             <div>
-                <p><b>Nombre</b>: <span id="result"></span></p>
+                <p><b>Nombre</b>: <span id="name"></span></p>
+                <p><b>Fecha de lanzamiento</b>: <span id="air_date"></span></p>
+                <p><b>Código</b>: <span id="episode_code"></span></p>
             </div>
-            <script>
-                form = document.getElementById('form-episodes')
-                form.addEventListener('submit', e => {
-                    e.preventDefault();
-                    let formData = new FormData(e.target)
-                    fetch('episodes.php?episode=' + formData.get('episode'))
-                        .then(response => response.json())
-                        .then(respJson => {
-                            document.getElementById('result').innerHTML = respJson.name
-                        });
-                })
-            </script>
+            <script src="episodes.js"></script>
         </main>
     </body>
 </html>
