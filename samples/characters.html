@@ -5,38 +5,35 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
+        <title>Personages</title>
         <!-- CSS only -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <link rel="stylesheet" href="characters.css">
     </head>
     <body class="container">
         <main>
-            <form action="characters.php" method="get" id="form-characters">
-                <div class="form-group">
-                    <label for="character">Indica el número del personage</label>
-                    <input class="form-control" type="number" name="character" id="character"/>
+            <form  action="characters.php" method="get" id="form-characters" 
+            class="row g-3 align-items-center" >
+                <div class="form-group  text-center mb-3"><br><br>
+                    <label for="character" ><h1>Indica el número del persona</h1></label><br><br>
+                    <input class="form-control " type="number" name="character" id="character"/>
                 </div>
                 <br/>
-                <div class="form-group">
+                <div class="form-group  text-center mb-3">
                     <button class="btn btn-info" type="submit">Consular</button>
                 </div>
             </form>
-            <div>
-                <p><b>Nombre</b>: <span id="result"></span></p>
+            <div clase = "mb-3">
+                <p><b>Nombre</b>: <span id="name"></span></p>
+                <p><b>Estado</b>: <span id="status"></span></p>
+                <p><b>Especies</b>: <span id="species"></span></p>
+                <p><b>Genero</b>: <span id="gender"></span></p>
+                <p><b>imagen</b>: <span id="image"></span></p>
+
             </div>
-            <script>
-                form = document.getElementById('form-characters')
-                form.addEventListener('submit', e => {
-                    e.preventDefault();
-                    let formData = new FormData(e.target)
-                    fetch('characters.php?character=' + formData.get('character'))
-                        .then(response => response.json())
-                        .then(respJson =>
-                        {
-                            document.getElementById('result').innerHTML = respJson.name;
-                        });
-                })
-            </script>
+            <img src= " $response['image']"  />
+
+            <script src="characters.js " ></script>
         </main>
     </body>
 </html>
