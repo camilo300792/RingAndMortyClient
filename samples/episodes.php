@@ -14,6 +14,12 @@ INSERT INTO episodes (id, `name`, air_date, episode, url, created)
 VALUES (?, ?, ?, ?, ?, ?)
 EOD;
 
+$queryInsertRelationships = <<<EOD
+INSERT INTO episodes_characters (id_episode, id_character) 
+VALUES 
+EOD;
+
+
 $stmt = $connection->prepare($query);
 $stmtInsert = $connection->prepare($queryInsert);
 
@@ -30,6 +36,14 @@ if (is_numeric($_GET['episode']) && is_int((int) $_GET['episode'])) {
             $responseDecoded['url'],
             $responseDecoded['created']
         ]);
+        $queryInsertRelationships .= substr(str_repeat('(?,?),', count($responseDecoded['characters'])), 0, -1);
+        $stmtInsertRelationship = $connection->prepare($queryInsertRelationships);
+        $queryParams = [];
+        foreach ($responseDecoded['characters'] as $character) {
+            $queryParams[] = $responseDecoded['id'];
+            $queryParams[] = str_replace('https://rickandmortyapi.com/api/character/', '', $character);
+        }
+        $stmtInsertRelationship->execute($queryParams);
         echo $response;
     } else {
         echo json_encode($result);

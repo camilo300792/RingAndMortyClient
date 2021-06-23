@@ -56,7 +56,7 @@ final class RAMClient
      */
     public function getEpisode(int $episode, bool $decode = false)
     {
-        return $this->sendRequest('GET', self::API_EPISODES . '/' . $episode);
+        return $this->sendRequest('GET', self::API_EPISODES . '/' . $episode, $decode);
     }
 
     /**

@@ -10,9 +10,8 @@ form.addEventListener('submit', e => {
             document.getElementById('status').innerHTML = respJson.status;
             document.getElementById('species').innerHTML = respJson.species;
             document.getElementById('gender').innerHTML = respJson.gender;
-            
-            
+            let imgElement = document.getElementById('image');
+            imgElement.setAttribute('src', respJson.image);
         });
-
-
 })
+

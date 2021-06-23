@@ -10,8 +10,8 @@ SELECT * FROM characters WHERE id = ?
 EOD;
 
 $queryInsert = <<<EOD
-INSERT INTO characters (id, `name`, status, species, type, gender)
-VALUES (?, ?, ?, ?, ?, ?)
+INSERT INTO characters (id, `name`, status, species, `type`, gender, image)
+VALUES (?, ?, ?, ?, ?, ?, ?)
 EOD;
 
 $stmt = $connection->prepare($query);
@@ -28,8 +28,8 @@ if (is_numeric($_GET['character']) && is_int((int) $_GET['character'])) {
             $responseDecoded['status'],
             $responseDecoded['species'],
             $responseDecoded['type'],
-            $responseDecoded['gender']
-            
+            $responseDecoded['gender'],
+            $responseDecoded['image']
         ]);
         echo $response;
     } else {
